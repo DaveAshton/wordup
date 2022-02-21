@@ -1,0 +1,70 @@
+:root {
+  --colour-amber: #b59f3b;
+  --colour-green: #6aaa64;
+  --colour-dark-grey: #787c7e;
+  --colour-light-grey: #3a3a3c;
+  --colour-almost-white: #f5f5fc;
+  --colour-red: red;
+}
+.GameView {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.Row {
+  display: flex;
+  height: 12vh;
+}
+.Cell {
+  border: 1px solid var(--colour-light-grey);
+  color: var(--colour-almost-white);
+  width: 12vh;
+  margin-left: 0.5vw;
+  margin-top: 0.5vw;
+  display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.Error {
+  display: flex;
+  justify-content: center;
+  border: 1px solid var(--colour-red);
+  /* width: 5*12vh;
+  margin-left: 0.5vw;
+  margin-top: 0.5vw; */
+  height: 12vh;
+}
+
+.Info {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+
+  height: 36vh;
+  z-index: 99;
+  opacity: 0.9;
+  background-color: var(--colour-dark-grey);
+  margin-top: 12vh;
+  border-radius: 4px;
+  box-shadow: 10px 10px 5px var(--colour-light-grey)
+}
+.Focussed {
+  border: 1px solid var(--colour-almost-white);
+}
+.ValidOutOfPosition {
+  background-color: var(--colour-amber);
+}
+
+.NotSet {
+  background-color: transparent;
+}
+
+.Correct {
+  background-color: var(--colour-green);
+}
+
+.Incorrect {
+  background-color: var(--colour-dark-grey);
+}

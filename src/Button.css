@@ -1,0 +1,22 @@
+
+.Button {
+  display: flex;
+  flex-direction: column;
+  font-family: inherit;
+  font-weight: bold;
+  border: 0;
+
+  border-radius: 4px;
+
+  user-select: none;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-transform: uppercase;
+ 
+}
+.Button:hover {
+  cursor: pointer;
+  outline: 1px solid grey;
+}

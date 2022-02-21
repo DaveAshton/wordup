@@ -1,0 +1,45 @@
+
+/* :root {
+  --colour-amber: #b59f3b;
+  --colour-green: #6aaa64;
+  --colour-dark-grey: #787c7e;
+  --colour-light-grey: #3a3a3c;
+  --colour-almost-white: #f5f5fc;
+} */
+
+.HeaderRoot {
+  display: flex;
+  flex-direction: row;
+    width: 100%;
+    padding-top: 1vh;
+    justify-content: center;
+    align-items: center;
+    margin-right: 0.5vw;
+    margin-top: 0.2vh;
+}
+
+.TitleCell {
+  width: 8vh;
+}
+
+.Title {
+  display: flex;
+
+  flex: 6;
+  margin: 0;
+  justify-content: center;
+  height: 8vh;
+}
+
+.NextGameButton {
+  margin-left: auto;
+  background-color: var(--colour-green);
+  height: 30px;
+  border-radius: 2px;
+  padding: 2px;
+  flex: 1;
+  margin-right: 0.5vw;
+}
+.Spacer {
+  flex: 1;
+}
