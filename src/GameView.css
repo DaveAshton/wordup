@@ -14,12 +14,12 @@
 }
 .Row {
   display: flex;
-  height: 12vh;
+  height: 11vh;
 }
 .Cell {
   border: 1px solid var(--colour-light-grey);
   color: var(--colour-almost-white);
-  width: 12vh;
+  width: 11vh;
   margin-left: 0.5vw;
   margin-top: 0.5vw;
   display: flex;
