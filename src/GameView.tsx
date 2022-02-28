@@ -65,13 +65,32 @@ export const GameView: FC<GameViewProps> = ({ word }) => {
       <Info message={`Hard luck, word was: \n ${word.toLocaleUpperCase()}`} />
     );
   }
+  const buttonTheme = gameData && toButtonTheme(gameData);
+
   return (
     <div className="GameView">
       {gameEnd}
       {rows}
-      <Board onKeyPress={handleKeyboardPress} />
+      <Board onKeyPress={handleKeyboardPress} buttonTheme={buttonTheme} />
     </div>
   );
+};
+
+const toButtonTheme = ({ usedLetters }: GameData) => {
+  const correct = Array.from(usedLetters[LetterStatus.Correct]).join(" ");
+  const vop = Array.from(usedLetters[LetterStatus.ValidOutOfPosition]).join(
+    " "
+  );
+
+  const buttonTheme = [
+  ];
+  if (correct.length > 0) {
+    buttonTheme.push({class: LetterStatus.Correct, buttons: correct})
+  }
+  if (vop.length > 0) {
+    buttonTheme.push({class: LetterStatus.ValidOutOfPosition, buttons: vop})
+  }
+  return buttonTheme;
 };
 
 export type RowProps = {

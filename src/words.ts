@@ -7,6 +7,7 @@ export const getWord = (length: number): string => {
   console.log(`getting word of length: ${length}`, words);
   const found = words.find(word => word.length === length);
   if (found) {
+    console.log('word is', found);
     return found;
   }
   return getWord(length);
