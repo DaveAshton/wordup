@@ -1,11 +1,4 @@
-/* :root {
-  --colour-amber: #b59f3b;
-  --colour-green: #6aaa64;
-  --colour-dark-grey: #787c7e;
-  --colour-light-grey: #3a3a3c;
-  --colour-almost-white: #f5f5fc;
-} */
-
+@import './variables.css';
 .Keyboard {
 
   background-color: var(--colour-dark-grey);
@@ -15,12 +8,21 @@
   margin-top: 1.5vh;
   margin-bottom: 1vh;
 }
+
 .hg-theme-default {
   background-color: var(--colour-dark-grey) !important;
+  padding-right: 0.5vw;
+  padding-left: 0.5vw;
 }
-/* .Keyboard .hg-button {
-  background-color: var(--colour-light-grey);
-} */
+
 .hg-theme-default .hg-button {
   background: var(--colour-light-grey)  !important;
+}
+
+.hg-theme-default .Correct {
+  background-color: var(--colour-green) !important;
+}
+
+.hg-theme-default .ValidOutOfPosition {
+  background-color: var(--colour-amber) !important;
 }

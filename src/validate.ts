@@ -110,7 +110,7 @@ export const validateRow = (
    // rowError: success ? undefined : `Hard luck, word was: ${gameWord}`,
     success
   };
-  console.log("validated", ret);
+  console.log("validated", ret.usedLetters, ret.focussed);
   return ret;
 };
 export const getNextRow = (gameData: GameData): GameData => {
@@ -160,13 +160,14 @@ export const updateCell = (gameData: GameData, value?: string): GameData => {
     return row;
   });
   return {
+    ...gameData, // new
     cells: updatedCells,
     focussed: updatedFocussed,
     rowError: undefined,
   };
 };
 
-export const updateGame = (
+ const validateGame = (
   gameData: GameData,
   code: number,
   gameWord: string,
@@ -209,12 +210,51 @@ export const updateGame = (
 
   return gameData;
 };
+
+export const updateGame= (
+  gameData: GameData,
+  code: number,
+  gameWord: string,
+  value?: string
+): GameData => {
+  const dt = validateGame(gameData, code, gameWord, value);
+  const {cells, focussed, usedLetters} = dt;
+
+  if (focussed.rowId > 0) {
+    cells[focussed.rowId-1].forEach((cell, idx) => {
+      if (cell.letter && cell.status === LetterStatus.Correct) {
+        usedLetters[LetterStatus.Correct].add(cell.letter);
+        if (usedLetters[LetterStatus.ValidOutOfPosition].has(cell.letter)) {
+          usedLetters[LetterStatus.ValidOutOfPosition].delete(cell.letter);
+        }
+  
+      } else if (cell.letter && cell.status === LetterStatus.ValidOutOfPosition) {
+        if (!usedLetters[LetterStatus.Correct].has(cell.letter)) {
+            usedLetters[LetterStatus.ValidOutOfPosition].add(cell.letter);
+        }
+        
+      }
+    });
+  }
+
+  return {
+    ...dt,
+    usedLetters: {
+      ...usedLetters
+    }
+  };
+
+}
 export type GameData = {
   focussed: CellData;
   cells: CellData[][];
   gameComplete?: boolean;
   rowError?: string;
   success?: boolean;
+  usedLetters: {
+    [LetterStatus.Correct]: Set<string>;
+    [LetterStatus.ValidOutOfPosition]: Set<string>;
+  }
 };
 
 export const createGame = (wordLength: number): GameData => {
@@ -223,6 +263,10 @@ export const createGame = (wordLength: number): GameData => {
   return {
     focussed: cells[0][0],
     cells,
+    usedLetters: {
+      [LetterStatus.Correct]: new Set<string>(),
+      [LetterStatus.ValidOutOfPosition]: new Set<string>()
+    }
   };
 };
 const createCells = (wordLength: number): CellData[][] => {
