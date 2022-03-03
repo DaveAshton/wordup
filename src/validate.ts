@@ -233,6 +233,11 @@ export const updateGame= (
             usedLetters[LetterStatus.ValidOutOfPosition].add(cell.letter);
         }
         
+      } else if (cell.letter && cell.status === LetterStatus.Incorrect) {
+        if (!usedLetters[LetterStatus.Correct].has(cell.letter) && !usedLetters[LetterStatus.ValidOutOfPosition].has(cell.letter)) {
+            usedLetters[LetterStatus.Incorrect].add(cell.letter);
+        }
+        
       }
     });
   }
@@ -254,6 +259,7 @@ export type GameData = {
   usedLetters: {
     [LetterStatus.Correct]: Set<string>;
     [LetterStatus.ValidOutOfPosition]: Set<string>;
+    [LetterStatus.Incorrect]: Set<string>;
   }
 };
 
@@ -265,7 +271,8 @@ export const createGame = (wordLength: number): GameData => {
     cells,
     usedLetters: {
       [LetterStatus.Correct]: new Set<string>(),
-      [LetterStatus.ValidOutOfPosition]: new Set<string>()
+      [LetterStatus.ValidOutOfPosition]: new Set<string>(),
+      [LetterStatus.Incorrect]: new Set<string>()
     }
   };
 };
