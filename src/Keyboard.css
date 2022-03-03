@@ -26,3 +26,7 @@
 .hg-theme-default .ValidOutOfPosition {
   background-color: var(--colour-amber) !important;
 }
+
+.hg-theme-default .Incorrect {
+  background-color: var(--colour-dark-grey) !important;
+}

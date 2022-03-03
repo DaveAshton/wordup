@@ -82,6 +82,7 @@ const toButtonTheme = ({ usedLetters }: GameData) => {
     " "
   );
 
+  const incorrect = Array.from(usedLetters[LetterStatus.Incorrect]).join(" ");
   const buttonTheme = [
   ];
   if (correct.length > 0) {
@@ -89,6 +90,9 @@ const toButtonTheme = ({ usedLetters }: GameData) => {
   }
   if (vop.length > 0) {
     buttonTheme.push({class: LetterStatus.ValidOutOfPosition, buttons: vop})
+  }
+  if (incorrect.length > 0) {
+    buttonTheme.push({class: LetterStatus.Incorrect, buttons: incorrect})
   }
   return buttonTheme;
 };
