@@ -48,21 +48,32 @@ const getPrevCell = ({ focussed, cells }: GameData): CellData => {
   return focussed;
 };
 
-export const validateRow = (
+const validateRow = (
   gameData: GameData,
   gameWord: string,
   isValidWord?: boolean
 ): GameData => {
   const { focussed, cells } = gameData;
   const { rowId } = focussed;
-  // const toTest = gameWord.split('');
   const upperWord = gameWord.toLocaleUpperCase();
-  const wordSet = new Set(upperWord.split(""));
+
+  const wordMap = upperWord.split("").reduce((map, letter) => {
+    let count = map.get(letter);
+    return map.set(letter, count ? count+1 : 1);
+  }, new Map<string, number>());
+  // console.log('word map', wordMap);
+
+  const deleteLetter = (letter: string) => {
+    let count = wordMap.get(letter);
+    if (count) {
+      wordMap.set(letter, count - 1);
+    }
+  };
 
   const isCorrectCell = (cell: CellData) => {
     const isCorrectLetter = cell.letter === upperWord[cell.cellId];
     if (isCorrectLetter && cell.letter) {
-      wordSet.delete(cell.letter);
+      deleteLetter(cell.letter);
     }
     return {
       ...cell,
@@ -76,19 +87,20 @@ export const validateRow = (
     if (cell.status === LetterStatus.Correct) {
       return cell;
     }
-    if (cell.letter && wordSet.has(cell.letter)) {
+    if (cell.letter && !!wordMap.get(cell.letter)) {
+      deleteLetter(cell.letter);
       return {
         ...cell,
         status: LetterStatus.ValidOutOfPosition,
       };
-    } else if (cell.letter && !wordSet.has(cell.letter)) {
+    } else if (cell.letter && !wordMap.get(cell.letter)) {
       return {
         ...cell,
         status: LetterStatus.Incorrect,
       };
     }
     if (cell.letter) {
-      wordSet.delete(cell.letter);
+      deleteLetter(cell.letter);
     }
 
     return cell;
@@ -107,13 +119,12 @@ export const validateRow = (
       return row;
     }),
     gameComplete,
-   // rowError: success ? undefined : `Hard luck, word was: ${gameWord}`,
     success
   };
   console.log("validated", ret.usedLetters, ret.focussed);
   return ret;
 };
-export const getNextRow = (gameData: GameData): GameData => {
+const getNextRow = (gameData: GameData): GameData => {
   const { focussed, cells } = gameData;
   const { rowId } = focussed;
   // if cellid is end of row and there are more rows available
@@ -129,7 +140,7 @@ export const getNextRow = (gameData: GameData): GameData => {
   }
   return gameData;
 };
-export const updateCell = (gameData: GameData, value?: string): GameData => {
+const updateCell = (gameData: GameData, value?: string): GameData => {
   if (gameData.gameComplete) {
     return {
       ...gameData,
@@ -211,7 +222,7 @@ export const updateCell = (gameData: GameData, value?: string): GameData => {
   return gameData;
 };
 
-export const updateGame= (
+export const updateGame = (
   gameData: GameData,
   code: number,
   gameWord: string,
@@ -264,7 +275,7 @@ export type GameData = {
 };
 
 export const createGame = (wordLength: number): GameData => {
-  console.log("creating game", wordLength);
+ // console.log("creating game", wordLength, lookup.size);
   const cells = createCells(wordLength);
   return {
     focussed: cells[0][0],

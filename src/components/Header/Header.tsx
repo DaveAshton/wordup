@@ -1,8 +1,8 @@
 import {  FC } from "react";
-import { Button } from "./Button";
-import { Cell } from "./GameView";
+import { Button } from "../Button";
+import { Cell } from "../GameView";
 import "./Header.css";
-import { LetterStatus } from "./validate";
+import { LetterStatus } from "../../validate";
 
 type HeaderProps = {
   onNewGame: () => void;
