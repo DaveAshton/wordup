@@ -1,13 +1,13 @@
-import { FC, useState, useEffect, useRef, LegacyRef } from "react";
+import { FC, useState, useEffect } from "react";
 import "./GameView.css";
-import { Board } from "./Keyboard";
+import { Board } from "../Keyboard";
 import {
   CellData,
   createGame,
   GameData,
   LetterStatus,
   updateGame,
-} from "./validate";
+} from "../../validate";
 
 export type GameViewProps = {
   word: string;
