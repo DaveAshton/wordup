@@ -1,5 +1,4 @@
 import {useEffect, useState} from 'react';
-import logo from './logo.svg';
 import './App.css';
 import { GameView, Header } from './components';
 import { getWord } from './words';
