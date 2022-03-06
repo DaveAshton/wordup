@@ -1,0 +1,26 @@
+@import '../../variables.css';
+.Error {
+  display: flex;
+  justify-content: center;
+  border: 1px solid var(--colour-red);
+  /* width: 5*12vh;
+  margin-left: 0.5vw;
+  margin-top: 0.5vw; */
+  height: 12vh;
+}
+
+.Info {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: flex-start;
+  height: 20vh;
+  z-index: 99;
+  opacity: 0.95;
+  background-color: var(--colour-light-grey);
+  margin-top: 12vh;
+  border-radius: 4px;
+  box-shadow: 10px 10px 5px var(--colour-light-grey);
+  padding: 5px;
+}

@@ -1,17 +1,6 @@
-const dictionary = require("./dictionary");
-export enum LetterStatus {
-  NotSet = "NotSet",
-  ValidOutOfPosition = "ValidOutOfPosition",
-  Correct = "Correct",
-  Incorrect = "Incorrect",
-}
+import { CellData, GameData, LetterStatus } from "../model";
 
-export type CellData = {
-  rowId: number;
-  cellId: number;
-  letter?: string;
-  status: LetterStatus;
-};
+const dictionary = require("./dictionary");
 
 const lookup = new Set(dictionary);
 
@@ -81,7 +70,6 @@ const validateRow = (
     };
   };
   let updatedRow = cells[rowId].map(isCorrectCell);
-
   updatedRow = updatedRow.map((cell) => {
 
     if (cell.status === LetterStatus.Correct) {
@@ -261,18 +249,7 @@ export const updateGame = (
   };
 
 }
-export type GameData = {
-  focussed: CellData;
-  cells: CellData[][];
-  gameComplete?: boolean;
-  rowError?: string;
-  success?: boolean;
-  usedLetters: {
-    [LetterStatus.Correct]: Set<string>;
-    [LetterStatus.ValidOutOfPosition]: Set<string>;
-    [LetterStatus.Incorrect]: Set<string>;
-  }
-};
+
 
 export const createGame = (wordLength: number): GameData => {
  // console.log("creating game", wordLength, lookup.size);

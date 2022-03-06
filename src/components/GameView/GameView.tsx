@@ -1,17 +1,15 @@
 import { FC, useState, useEffect } from "react";
 import "./GameView.css";
-import { Board } from "../Keyboard";
-import {
-  CellData,
-  createGame,
-  GameData,
-  LetterStatus,
-  updateGame,
-} from "../../validate";
+import { Board, toButtonTheme } from "../Keyboard";
+import { createGame,  updateGame } from "../../validate";
+import { Complete } from "./Complete";
+import { Row } from "./Row";
+import {GameData} from '../../model'
 
 export type GameViewProps = {
   word: string;
 };
+
 export const GameView: FC<GameViewProps> = ({ word }) => {
   const [gameData, setGameData] = useState<GameData | undefined>();
 
@@ -57,110 +55,15 @@ export const GameView: FC<GameViewProps> = ({ word }) => {
     );
   });
 
-  let gameEnd: any;
-  if (gameData?.gameComplete) {
-    gameEnd = gameData?.success ? (
-      <Info message="Well done, you got the correct word" />
-    ) : (
-      <Info message={`Hard luck, word was: \n ${word.toLocaleUpperCase()}`} />
-    );
-  }
   const buttonTheme = gameData && toButtonTheme(gameData);
 
   return (
     <div className="GameView">
-      {gameEnd}
+      {gameData?.gameComplete && (
+        <Complete gameWord={word} success={gameData?.success} />
+      )}
       {rows}
       <Board onKeyPress={handleKeyboardPress} buttonTheme={buttonTheme} />
     </div>
   );
-};
-
-const toButtonTheme = ({ usedLetters }: GameData) => {
-  const correct = Array.from(usedLetters[LetterStatus.Correct]).join(" ");
-  const vop = Array.from(usedLetters[LetterStatus.ValidOutOfPosition]).join(
-    " "
-  );
-
-  const incorrect = Array.from(usedLetters[LetterStatus.Incorrect]).join(" ");
-  const buttonTheme = [
-  ];
-  if (correct.length > 0) {
-    buttonTheme.push({class: LetterStatus.Correct, buttons: correct})
-  }
-  if (vop.length > 0) {
-    buttonTheme.push({class: LetterStatus.ValidOutOfPosition, buttons: vop})
-  }
-  if (incorrect.length > 0) {
-    buttonTheme.push({class: LetterStatus.Incorrect, buttons: incorrect})
-  }
-  return buttonTheme;
-};
-
-export type RowProps = {
-  rowId: number;
-  cells: CellData[];
-  focussedCell: CellData;
-  onLetterChange?: (letter: string) => void;
-  errorMessage?: string;
-};
-const Row: FC<RowProps> = ({ cells, rowId, focussedCell, errorMessage }) => {
-  const [err, setErr] = useState<string | null>(null);
-
-  useEffect(() => {
-    if (errorMessage) {
-      setErr(errorMessage);
-      setTimeout(() => setErr(null), 2000);
-    }
-  }, [errorMessage]);
-
-  if (err) {
-    return <Error message={err} />;
-  }
-  const cellsComps = cells.map(({ status, letter }, cellIdx) => {
-    const isFocussed =
-      focussedCell.cellId === cellIdx && focussedCell.rowId === rowId;
-    return (
-      <Cell
-        key={`${rowId}-${cellIdx}`}
-        status={status}
-        letter={letter}
-        isFocussed={isFocussed}
-      />
-    );
-  });
-  return <div className="Row">{cellsComps}</div>;
-};
-const getClass = (
-  status: LetterStatus,
-  isFocussed: boolean,
-  className?: string
-) =>
-  `Cell ${status} ${isFocussed ? "Focussed" : undefined} ${className}`.trim();
-
-export type CellProps = {
-  isFocussed: boolean;
-  letter?: string;
-  status: LetterStatus;
-  className?: string;
-};
-export const Cell: FC<CellProps> = ({
-  letter,
-  status,
-  isFocussed,
-  className,
-}) => {
-  return (
-    <div className={getClass(status, isFocussed, className)}>{letter}</div>
-  );
-};
-
-type ErrorProps = { message?: string };
-const Error: FC<ErrorProps> = ({ message }) => {
-  return <div className="Error">{message}</div>;
-};
-
-type InfoProps = { message?: string };
-const Info: FC<InfoProps> = ({ message }) => {
-  return <div className="Info">{message}</div>;
 };
