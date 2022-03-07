@@ -1,5 +1,5 @@
-import { GameData } from "..";
-import { updateGame, createGame, LetterStatus, CellData } from "../validate";
+import { GameData, LetterStatus } from "../../model";
+import { updateGame, createGame,  } from "../validate";
 
 jest.mock("../dictionary", () => {
   return [
@@ -221,6 +221,9 @@ describe("updateGame tests", () => {
       it("should have row error", () => {
         expect(gameData.rowError).toBeTruthy();
       });
+      it ('should match snapshot', () => {
+        expect(gameData).toMatchSnapshot();
+      });
     });
   });
 });
@@ -299,6 +302,10 @@ describe("given game word with double letters", () => {
       it("should not have row error", () => {
         expect(gameData.rowError).toBeFalsy();
       });
+
+      it ('should match snapshot', () => {
+        expect(gameData).toMatchSnapshot();
+      });
     });
   });
 });
@@ -361,6 +368,10 @@ describe("given game played to completion", () => {
 
       it("should not have row error", () => {
         expect(gameData.rowError).toBeFalsy();
+      });
+
+      it ('should match snapshot', () => {
+        expect(gameData).toMatchSnapshot();
       });
     });
   });

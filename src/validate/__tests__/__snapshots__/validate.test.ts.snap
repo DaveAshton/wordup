@@ -1,0 +1,587 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`given game played to completion given user adds 2 valid words, then invalid word then backspaces and enters correct word should match snapshot 1`] = `
+Object {
+  "cells": Array [
+    Array [
+      Object {
+        "cellId": 0,
+        "letter": "S",
+        "rowId": 0,
+        "status": "ValidOutOfPosition",
+      },
+      Object {
+        "cellId": 1,
+        "letter": "W",
+        "rowId": 0,
+        "status": "Incorrect",
+      },
+      Object {
+        "cellId": 2,
+        "letter": "I",
+        "rowId": 0,
+        "status": "Incorrect",
+      },
+      Object {
+        "cellId": 3,
+        "letter": "N",
+        "rowId": 0,
+        "status": "Incorrect",
+      },
+      Object {
+        "cellId": 4,
+        "letter": "E",
+        "rowId": 0,
+        "status": "ValidOutOfPosition",
+      },
+    ],
+    Array [
+      Object {
+        "cellId": 0,
+        "letter": "S",
+        "rowId": 1,
+        "status": "ValidOutOfPosition",
+      },
+      Object {
+        "cellId": 1,
+        "letter": "T",
+        "rowId": 1,
+        "status": "ValidOutOfPosition",
+      },
+      Object {
+        "cellId": 2,
+        "letter": "R",
+        "rowId": 1,
+        "status": "ValidOutOfPosition",
+      },
+      Object {
+        "cellId": 3,
+        "letter": "I",
+        "rowId": 1,
+        "status": "Incorrect",
+      },
+      Object {
+        "cellId": 4,
+        "letter": "P",
+        "rowId": 1,
+        "status": "Incorrect",
+      },
+    ],
+    Array [
+      Object {
+        "cellId": 0,
+        "letter": "T",
+        "rowId": 2,
+        "status": "Correct",
+      },
+      Object {
+        "cellId": 1,
+        "letter": "R",
+        "rowId": 2,
+        "status": "Correct",
+      },
+      Object {
+        "cellId": 2,
+        "letter": "E",
+        "rowId": 2,
+        "status": "Correct",
+      },
+      Object {
+        "cellId": 3,
+        "letter": "E",
+        "rowId": 2,
+        "status": "Correct",
+      },
+      Object {
+        "cellId": 4,
+        "letter": "S",
+        "rowId": 2,
+        "status": "Correct",
+      },
+    ],
+    Array [
+      Object {
+        "cellId": 0,
+        "rowId": 3,
+        "status": "NotSet",
+      },
+      Object {
+        "cellId": 1,
+        "rowId": 3,
+        "status": "NotSet",
+      },
+      Object {
+        "cellId": 2,
+        "rowId": 3,
+        "status": "NotSet",
+      },
+      Object {
+        "cellId": 3,
+        "rowId": 3,
+        "status": "NotSet",
+      },
+      Object {
+        "cellId": 4,
+        "rowId": 3,
+        "status": "NotSet",
+      },
+    ],
+    Array [
+      Object {
+        "cellId": 0,
+        "rowId": 4,
+        "status": "NotSet",
+      },
+      Object {
+        "cellId": 1,
+        "rowId": 4,
+        "status": "NotSet",
+      },
+      Object {
+        "cellId": 2,
+        "rowId": 4,
+        "status": "NotSet",
+      },
+      Object {
+        "cellId": 3,
+        "rowId": 4,
+        "status": "NotSet",
+      },
+      Object {
+        "cellId": 4,
+        "rowId": 4,
+        "status": "NotSet",
+      },
+    ],
+    Array [
+      Object {
+        "cellId": 0,
+        "rowId": 5,
+        "status": "NotSet",
+      },
+      Object {
+        "cellId": 1,
+        "rowId": 5,
+        "status": "NotSet",
+      },
+      Object {
+        "cellId": 2,
+        "rowId": 5,
+        "status": "NotSet",
+      },
+      Object {
+        "cellId": 3,
+        "rowId": 5,
+        "status": "NotSet",
+      },
+      Object {
+        "cellId": 4,
+        "rowId": 5,
+        "status": "NotSet",
+      },
+    ],
+  ],
+  "focussed": Object {
+    "cellId": -1,
+    "rowId": -1,
+    "status": "NotSet",
+  },
+  "gameComplete": true,
+  "rowError": undefined,
+  "success": true,
+  "usedLetters": Object {
+    "Correct": Set {},
+    "Incorrect": Set {
+      "W",
+      "I",
+      "N",
+      "P",
+    },
+    "ValidOutOfPosition": Set {
+      "S",
+      "E",
+      "T",
+      "R",
+    },
+  },
+}
+`;
+
+exports[`given game word with double letters given user adds valid word but not game word then hits enter should match snapshot 1`] = `
+Object {
+  "cells": Array [
+    Array [
+      Object {
+        "cellId": 0,
+        "letter": "T",
+        "rowId": 0,
+        "status": "Correct",
+      },
+      Object {
+        "cellId": 1,
+        "letter": "H",
+        "rowId": 0,
+        "status": "Incorrect",
+      },
+      Object {
+        "cellId": 2,
+        "letter": "E",
+        "rowId": 0,
+        "status": "Correct",
+      },
+      Object {
+        "cellId": 3,
+        "letter": "R",
+        "rowId": 0,
+        "status": "ValidOutOfPosition",
+      },
+      Object {
+        "cellId": 4,
+        "letter": "E",
+        "rowId": 0,
+        "status": "ValidOutOfPosition",
+      },
+    ],
+    Array [
+      Object {
+        "cellId": 0,
+        "rowId": 1,
+        "status": "NotSet",
+      },
+      Object {
+        "cellId": 1,
+        "rowId": 1,
+        "status": "NotSet",
+      },
+      Object {
+        "cellId": 2,
+        "rowId": 1,
+        "status": "NotSet",
+      },
+      Object {
+        "cellId": 3,
+        "rowId": 1,
+        "status": "NotSet",
+      },
+      Object {
+        "cellId": 4,
+        "rowId": 1,
+        "status": "NotSet",
+      },
+    ],
+    Array [
+      Object {
+        "cellId": 0,
+        "rowId": 2,
+        "status": "NotSet",
+      },
+      Object {
+        "cellId": 1,
+        "rowId": 2,
+        "status": "NotSet",
+      },
+      Object {
+        "cellId": 2,
+        "rowId": 2,
+        "status": "NotSet",
+      },
+      Object {
+        "cellId": 3,
+        "rowId": 2,
+        "status": "NotSet",
+      },
+      Object {
+        "cellId": 4,
+        "rowId": 2,
+        "status": "NotSet",
+      },
+    ],
+    Array [
+      Object {
+        "cellId": 0,
+        "rowId": 3,
+        "status": "NotSet",
+      },
+      Object {
+        "cellId": 1,
+        "rowId": 3,
+        "status": "NotSet",
+      },
+      Object {
+        "cellId": 2,
+        "rowId": 3,
+        "status": "NotSet",
+      },
+      Object {
+        "cellId": 3,
+        "rowId": 3,
+        "status": "NotSet",
+      },
+      Object {
+        "cellId": 4,
+        "rowId": 3,
+        "status": "NotSet",
+      },
+    ],
+    Array [
+      Object {
+        "cellId": 0,
+        "rowId": 4,
+        "status": "NotSet",
+      },
+      Object {
+        "cellId": 1,
+        "rowId": 4,
+        "status": "NotSet",
+      },
+      Object {
+        "cellId": 2,
+        "rowId": 4,
+        "status": "NotSet",
+      },
+      Object {
+        "cellId": 3,
+        "rowId": 4,
+        "status": "NotSet",
+      },
+      Object {
+        "cellId": 4,
+        "rowId": 4,
+        "status": "NotSet",
+      },
+    ],
+    Array [
+      Object {
+        "cellId": 0,
+        "rowId": 5,
+        "status": "NotSet",
+      },
+      Object {
+        "cellId": 1,
+        "rowId": 5,
+        "status": "NotSet",
+      },
+      Object {
+        "cellId": 2,
+        "rowId": 5,
+        "status": "NotSet",
+      },
+      Object {
+        "cellId": 3,
+        "rowId": 5,
+        "status": "NotSet",
+      },
+      Object {
+        "cellId": 4,
+        "rowId": 5,
+        "status": "NotSet",
+      },
+    ],
+  ],
+  "focussed": Object {
+    "cellId": 0,
+    "rowId": 1,
+    "status": "NotSet",
+  },
+  "gameComplete": false,
+  "rowError": undefined,
+  "success": false,
+  "usedLetters": Object {
+    "Correct": Set {
+      "T",
+      "E",
+    },
+    "Incorrect": Set {
+      "H",
+    },
+    "ValidOutOfPosition": Set {
+      "R",
+    },
+  },
+}
+`;
+
+exports[`updateGame tests given user adds invalid word then hits enter should match snapshot 1`] = `
+Object {
+  "cells": Array [
+    Array [
+      Object {
+        "cellId": 0,
+        "letter": "P",
+        "rowId": 0,
+        "status": "NotSet",
+      },
+      Object {
+        "cellId": 1,
+        "letter": "A",
+        "rowId": 0,
+        "status": "NotSet",
+      },
+      Object {
+        "cellId": 2,
+        "letter": "R",
+        "rowId": 0,
+        "status": "NotSet",
+      },
+      Object {
+        "cellId": 3,
+        "letter": "P",
+        "rowId": 0,
+        "status": "NotSet",
+      },
+      Object {
+        "cellId": 4,
+        "letter": "S",
+        "rowId": 0,
+        "status": "NotSet",
+      },
+    ],
+    Array [
+      Object {
+        "cellId": 0,
+        "rowId": 1,
+        "status": "NotSet",
+      },
+      Object {
+        "cellId": 1,
+        "rowId": 1,
+        "status": "NotSet",
+      },
+      Object {
+        "cellId": 2,
+        "rowId": 1,
+        "status": "NotSet",
+      },
+      Object {
+        "cellId": 3,
+        "rowId": 1,
+        "status": "NotSet",
+      },
+      Object {
+        "cellId": 4,
+        "rowId": 1,
+        "status": "NotSet",
+      },
+    ],
+    Array [
+      Object {
+        "cellId": 0,
+        "rowId": 2,
+        "status": "NotSet",
+      },
+      Object {
+        "cellId": 1,
+        "rowId": 2,
+        "status": "NotSet",
+      },
+      Object {
+        "cellId": 2,
+        "rowId": 2,
+        "status": "NotSet",
+      },
+      Object {
+        "cellId": 3,
+        "rowId": 2,
+        "status": "NotSet",
+      },
+      Object {
+        "cellId": 4,
+        "rowId": 2,
+        "status": "NotSet",
+      },
+    ],
+    Array [
+      Object {
+        "cellId": 0,
+        "rowId": 3,
+        "status": "NotSet",
+      },
+      Object {
+        "cellId": 1,
+        "rowId": 3,
+        "status": "NotSet",
+      },
+      Object {
+        "cellId": 2,
+        "rowId": 3,
+        "status": "NotSet",
+      },
+      Object {
+        "cellId": 3,
+        "rowId": 3,
+        "status": "NotSet",
+      },
+      Object {
+        "cellId": 4,
+        "rowId": 3,
+        "status": "NotSet",
+      },
+    ],
+    Array [
+      Object {
+        "cellId": 0,
+        "rowId": 4,
+        "status": "NotSet",
+      },
+      Object {
+        "cellId": 1,
+        "rowId": 4,
+        "status": "NotSet",
+      },
+      Object {
+        "cellId": 2,
+        "rowId": 4,
+        "status": "NotSet",
+      },
+      Object {
+        "cellId": 3,
+        "rowId": 4,
+        "status": "NotSet",
+      },
+      Object {
+        "cellId": 4,
+        "rowId": 4,
+        "status": "NotSet",
+      },
+    ],
+    Array [
+      Object {
+        "cellId": 0,
+        "rowId": 5,
+        "status": "NotSet",
+      },
+      Object {
+        "cellId": 1,
+        "rowId": 5,
+        "status": "NotSet",
+      },
+      Object {
+        "cellId": 2,
+        "rowId": 5,
+        "status": "NotSet",
+      },
+      Object {
+        "cellId": 3,
+        "rowId": 5,
+        "status": "NotSet",
+      },
+      Object {
+        "cellId": 4,
+        "rowId": 5,
+        "status": "NotSet",
+      },
+    ],
+  ],
+  "focussed": Object {
+    "cellId": 4,
+    "rowId": 0,
+    "status": "NotSet",
+  },
+  "rowError": "Invalid word.",
+  "usedLetters": Object {
+    "Correct": Set {},
+    "Incorrect": Set {},
+    "ValidOutOfPosition": Set {},
+  },
+}
+`;
