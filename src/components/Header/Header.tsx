@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, memo } from "react";
 import { Button } from "../Button";
 import { Cells } from "../GameView";
 import "./Header.css";
@@ -45,7 +45,7 @@ const title = [
     className: "TitleCell",
   },
 ];
-export const Header: FC<HeaderProps> = ({ onNewGame }) => {
+export const Header: FC<HeaderProps> = memo(({ onNewGame }) => {
   return (
     <div className="HeaderRoot">
       <div className="Spacer" />
@@ -58,4 +58,4 @@ export const Header: FC<HeaderProps> = ({ onNewGame }) => {
       </Button>
     </div>
   );
-};
+});

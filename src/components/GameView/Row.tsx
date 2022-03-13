@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useEffect, useState, memo } from "react";
 import { CellData } from "../../model";
 import { Cell } from "./Cell";
 import { Error } from "../notifications";
@@ -8,11 +8,10 @@ export type RowProps = {
   rowId: number;
   cells: CellData[];
   focussedCell: CellData;
-  onLetterChange?: (letter: string) => void;
   errorMessage?: string;
 };
 
-export const Row: FC<RowProps> = ({
+export const Row: FC<RowProps> = memo(({
   cells,
   rowId,
   focussedCell,
@@ -43,4 +42,4 @@ export const Row: FC<RowProps> = ({
     );
   });
   return <div className="Row">{cellsComps}</div>;
-};
+});

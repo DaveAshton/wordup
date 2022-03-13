@@ -1,4 +1,5 @@
 import { CellData, GameData, LetterStatus } from "../model";
+import { getWord } from "../words";
 
 const dictionary = require("./dictionary");
 
@@ -39,16 +40,17 @@ const getPrevCell = ({ focussed, cells }: GameData): CellData => {
 
 const validateRow = (
   gameData: GameData,
-  gameWord: string,
+  // gameWord: string,
   isValidWord?: boolean
 ): GameData => {
+  const { gameWord } = gameData;
   const { focussed, cells } = gameData;
   const { rowId } = focussed;
   const upperWord = gameWord.toLocaleUpperCase();
 
   const wordMap = upperWord.split("").reduce((map, letter) => {
     let count = map.get(letter);
-    return map.set(letter, count ? count+1 : 1);
+    return map.set(letter, count ? count + 1 : 1);
   }, new Map<string, number>());
   // console.log('word map', wordMap);
 
@@ -71,7 +73,6 @@ const validateRow = (
   };
   let updatedRow = cells[rowId].map(isCorrectCell);
   updatedRow = updatedRow.map((cell) => {
-
     if (cell.status === LetterStatus.Correct) {
       return cell;
     }
@@ -94,10 +95,12 @@ const validateRow = (
     return cell;
   });
 
-  const success = updatedRow.every((cell, cellIdx) => cell.letter === upperWord[cellIdx]);
-  const isLastRow = (isValidWord && rowId === cells.length - 1);
+  const success = updatedRow.every(
+    (cell, cellIdx) => cell.letter === upperWord[cellIdx]
+  );
+  const isLastRow = isValidWord && rowId === cells.length - 1;
   const gameComplete = success || isLastRow;
- 
+
   const ret = {
     ...gameData,
     cells: cells.map((row, rowIdx) => {
@@ -107,7 +110,7 @@ const validateRow = (
       return row;
     }),
     gameComplete,
-    success
+    success,
   };
   console.log("validated", ret.usedLetters, ret.focussed);
   return ret;
@@ -166,19 +169,12 @@ const updateCell = (gameData: GameData, value?: string): GameData => {
   };
 };
 
- const validateGame = (
+const validateGame = (
   gameData: GameData,
   code: number,
-  gameWord: string,
   value?: string
 ): GameData => {
-  // console.log(
-  //   ">>",
-  //   gameData.focussed.cellId === gameData.cells[0].length - 1,
-  //   gameData.focussed.cellId,
-  //   gameData.cells[0].length - 1,
-  //   gameData.cells[gameData.focussed.rowId][gameData.focussed.cellId].letter
-  // );
+
   if (code > 64 && code < 91) {
     return updateCell(gameData, value?.toLocaleUpperCase());
   } else if (value === "Backspace" || value === "{bksp}") {
@@ -193,7 +189,7 @@ const updateCell = (gameData: GameData, value?: string): GameData => {
           gameData.cells[gameData.focussed.rowId].map((x) => x.letter).join("")
         )
       ) {
-        const upd = validateRow(gameData, gameWord, true);
+        const upd = validateRow(gameData, true);
         if (upd.gameComplete) {
           return updateCell(upd);
         }
@@ -213,30 +209,32 @@ const updateCell = (gameData: GameData, value?: string): GameData => {
 export const updateGame = (
   gameData: GameData,
   code: number,
-  gameWord: string,
   value?: string
 ): GameData => {
-  const dt = validateGame(gameData, code, gameWord, value);
-  const {cells, focussed, usedLetters} = dt;
+  const dt = validateGame(gameData, code, value);
+  const { cells, focussed, usedLetters } = dt;
 
   if (focussed.rowId > 0) {
-    cells[focussed.rowId-1].forEach((cell, idx) => {
+    cells[focussed.rowId - 1].forEach((cell, idx) => {
       if (cell.letter && cell.status === LetterStatus.Correct) {
         usedLetters[LetterStatus.Correct].add(cell.letter);
         if (usedLetters[LetterStatus.ValidOutOfPosition].has(cell.letter)) {
           usedLetters[LetterStatus.ValidOutOfPosition].delete(cell.letter);
         }
-  
-      } else if (cell.letter && cell.status === LetterStatus.ValidOutOfPosition) {
+      } else if (
+        cell.letter &&
+        cell.status === LetterStatus.ValidOutOfPosition
+      ) {
         if (!usedLetters[LetterStatus.Correct].has(cell.letter)) {
-            usedLetters[LetterStatus.ValidOutOfPosition].add(cell.letter);
+          usedLetters[LetterStatus.ValidOutOfPosition].add(cell.letter);
         }
-        
       } else if (cell.letter && cell.status === LetterStatus.Incorrect) {
-        if (!usedLetters[LetterStatus.Correct].has(cell.letter) && !usedLetters[LetterStatus.ValidOutOfPosition].has(cell.letter)) {
-            usedLetters[LetterStatus.Incorrect].add(cell.letter);
+        if (
+          !usedLetters[LetterStatus.Correct].has(cell.letter) &&
+          !usedLetters[LetterStatus.ValidOutOfPosition].has(cell.letter)
+        ) {
+          usedLetters[LetterStatus.Incorrect].add(cell.letter);
         }
-        
       }
     });
   }
@@ -244,24 +242,24 @@ export const updateGame = (
   return {
     ...dt,
     usedLetters: {
-      ...usedLetters
-    }
+      ...usedLetters,
+    },
   };
-
-}
-
+};
 
 export const createGame = (wordLength: number): GameData => {
- // console.log("creating game", wordLength, lookup.size);
+  const gameWord = getWord(wordLength);
+  console.log("creating game", wordLength, lookup.size, gameWord);
   const cells = createCells(wordLength);
   return {
+    gameWord,
     focussed: cells[0][0],
     cells,
     usedLetters: {
       [LetterStatus.Correct]: new Set<string>(),
       [LetterStatus.ValidOutOfPosition]: new Set<string>(),
-      [LetterStatus.Incorrect]: new Set<string>()
-    }
+      [LetterStatus.Incorrect]: new Set<string>(),
+    },
   };
 };
 const createCells = (wordLength: number): CellData[][] => {

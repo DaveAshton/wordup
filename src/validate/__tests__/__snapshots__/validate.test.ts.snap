@@ -187,6 +187,7 @@ Object {
     "status": "NotSet",
   },
   "gameComplete": true,
+  "gameWord": "TREES",
   "rowError": undefined,
   "success": true,
   "usedLetters": Object {
@@ -384,6 +385,7 @@ Object {
     "status": "NotSet",
   },
   "gameComplete": false,
+  "gameWord": "TREES",
   "rowError": undefined,
   "success": false,
   "usedLetters": Object {
@@ -577,6 +579,7 @@ Object {
     "rowId": 0,
     "status": "NotSet",
   },
+  "gameWord": "bears",
   "rowError": "Invalid word.",
   "usedLetters": Object {
     "Correct": Set {},
