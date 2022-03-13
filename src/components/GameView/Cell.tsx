@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, memo } from "react";
 import { LetterStatus } from "../../model";
 import "./GameView.css";
 
@@ -15,7 +15,7 @@ export type CellProps = {
   status: LetterStatus;
   className?: string;
 };
-export const Cell: FC<CellProps> = ({
+export const Cell: FC<CellProps> = memo(({
   letter,
   status,
   isFocussed,
@@ -24,7 +24,7 @@ export const Cell: FC<CellProps> = ({
   return (
     <div className={getClass(status, isFocussed, className)}>{letter}</div>
   );
-};
+});
 
 type CellsProps = {
   cells: CellProps[];

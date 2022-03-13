@@ -1,5 +1,8 @@
 import { GameData, LetterStatus } from "../../model";
 import { updateGame, createGame,  } from "../validate";
+import * as words from '../../words' ;
+
+const mockWords = words as unknown as { getWord: () => void };
 
 jest.mock("../dictionary", () => {
   return [
@@ -15,11 +18,18 @@ jest.mock("../dictionary", () => {
   ];
 });
 
+jest.mock("../../words", () => ({
+  __esModule: true,
+  getWord: null
+}));
+
 const update =
-  (gameWord: string) => (data: GameData, letter: string, code?: number) => {
-    const keyCode = code == undefined ? letter.charCodeAt(0) : code;
-    // console.log('keycode', keyCode);
-    return updateGame(data, keyCode, gameWord, letter);
+  (mockGameWord: string) => {
+    mockWords.getWord = () => mockGameWord;
+    return (data: GameData, letter: string, code?: number) => {
+      const keyCode = code == undefined ? letter.charCodeAt(0) : code;
+      return updateGame(data, keyCode, letter);
+    };
   };
 
 const updateMultiple = (

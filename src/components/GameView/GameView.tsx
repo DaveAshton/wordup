@@ -1,29 +1,21 @@
-import { FC, useState, useEffect } from "react";
+import { FC, useEffect } from "react";
 import "./GameView.css";
 import { Board, toButtonTheme } from "../Keyboard";
-import { createGame,  updateGame } from "../../validate";
 import { Complete } from "./Complete";
 import { Row } from "./Row";
-import {GameData} from '../../model'
+import { GameData } from "../../model";
 
 export type GameViewProps = {
-  word: string;
+  gameData: GameData;
+  onUserInput: (key: string, keyCode: number) => void;
 };
 
-export const GameView: FC<GameViewProps> = ({ word }) => {
-  const [gameData, setGameData] = useState<GameData | undefined>();
-
-  useEffect(() => {
-    setGameData(createGame(word.length));
-  }, [word]);
-
+export const GameView: FC<GameViewProps> = ({ gameData, onUserInput }) => {
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       console.log(e.key, e.code, e.keyCode, gameData);
       const code = e.keyCode;
-      if (gameData) {
-        setGameData(updateGame(gameData, code, word, e.key));
-      }
+      onUserInput(e.key, code);
     };
 
     document.addEventListener("keydown", handleKeyDown);
@@ -31,13 +23,10 @@ export const GameView: FC<GameViewProps> = ({ word }) => {
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
     };
-  }, [gameData, word]);
+  }, [gameData, onUserInput]);
 
   const handleKeyboardPress = (key: string) => {
-    //  console.log("keyboard press", key, key.charCodeAt(0));
-    if (gameData) {
-      setGameData(updateGame(gameData, key.charCodeAt(0), word, key));
-    }
+    onUserInput(key, key.charCodeAt(0));
   };
   const rows = gameData?.cells.map((row, idx) => {
     const errMessage =
@@ -60,7 +49,7 @@ export const GameView: FC<GameViewProps> = ({ word }) => {
   return (
     <div className="GameView">
       {gameData?.gameComplete && (
-        <Complete gameWord={word} success={gameData?.success} />
+        <Complete gameWord={gameData.gameWord} success={gameData.success} />
       )}
       {rows}
       <Board onKeyPress={handleKeyboardPress} buttonTheme={buttonTheme} />
